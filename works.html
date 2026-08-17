@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Все работы — Андрей Смирнов</title>
+<style>
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  /* Цвет крафтовой бумаги */
+  background-color: #E3DACC; 
+  /* SVG-шум для создания шершавой текстуры бумаги */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+  
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #333;
+}
+
+.container {
+  text-align: center;
+  padding: 2rem;
+  max-width: 800px;
+}
+
+/* Оформление картинки-заглушки */
+.placeholder-img {
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  border: 10px solid #fff; /* Эффект белой рамки, как у полароида или распечатки */
+  transform: rotate(-2deg); /* Слегка небрежный наклон для стиля */
+}
+
+/* Кнопка "На главную" в стиле основного сайта, но под светлый фон */
+.back-btn {
+  margin-top: 3rem;
+  display: inline-block;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: #333;
+  text-decoration: none;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0.9rem 2.5rem;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: #333;
+}
+</style>
+</head>
+<body>
+
+  <div class="container">
+    <img src="tech_chocolate.jpg" alt="Технические шоколадки" class="placeholder-img">
+    
+    <br>
+    
+    <!-- Ссылка обратно на главную страницу -->
+    <a href="index.html" class="back-btn">Вернуться на главную</a>
+  </div>
+
+</body>
+</html>
