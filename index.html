@@ -5,24 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Андрей Смирнов — видеомонтажёр</title>
 <style>
-/* Reset */
+/* 
+  ========================================
+  1. БАЗОВЫЕ НАСТРОЙКИ И ПЕРЕМЕННЫЕ
+  ========================================
+*/
+
+/* Сброс стандартных отступов браузера для всех элементов */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Variables */
+/* CSS-переменные для удобной смены темы (цвета и шрифты хранятся здесь) */
 :root {
-  --black: #0d0d0d;
-  --near-black: #1a1a1a;
-  --dark: #222;
-  --mid: #3a3a3a;
+  --black: #0d0d0d;        /* Основной фон сайта */
+  --near-black: #1a1a1a;   /* Фон для карточек */
+  --dark: #222;            /* Рамки и разделители */
+  --mid: #3a3a3a;          /* Ползунок скролла */
 
-  /* БАЗА: Приглушённый мягкий текст для комфорта глаз на тёмном */
-  --text: #D0D8E0;
-  --text-dim: #8899AA;
+  /* БАЗА: Приглушённый мягкий текст для комфорта глаз на тёмном фоне */
+  --text: #D0D8E0; 
+  --text-dim: #8899AA;     /* Второстепенный текст и ссылки */
 
-  /* АКЦЕНТ */
-  --accent: #FF7043;
+  /* АКЦЕНТ: Фирменный цвет (оранжевый) */
+  --accent: #FF7043; 
 
-  /* Шрифты */
+  /* Шрифты (разделены на моноширинный, с засечками и системные гротески) */
   --font-mono: "Courier New", "Cascadia Code", "Fira Code", "Consolas", monospace;
   --font-serif: Georgia, "Times New Roman", "Noto Serif", serif;
   --font-text: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -31,7 +37,7 @@
 
 html {
   font-size: 15px;
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* Плавная прокрутка при клике на якорные ссылки в меню */
   background: var(--black);
 }
 
@@ -40,11 +46,17 @@ body {
   background: var(--black);
   color: var(--text);
   line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased; /* Сглаживание шрифтов для macOS */
   position: relative;
 }
 
-/* Scrollbar */
+/* 
+  ========================================
+  2. ГЛОБАЛЬНЫЕ ЭЛЕМЕНТЫ (Скроллбар, Ссылки)
+  ========================================
+*/
+
+/* Кастомизация полосы прокрутки вебкита (Chrome, Safari, Edge) */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--black); }
 ::-webkit-scrollbar-thumb { background: var(--mid); border-radius: 3px; }
@@ -53,17 +65,23 @@ img { max-width: 100%; display: block; }
 a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
 a:hover { color: var(--accent); }
 
-/* ===== ТЕКСТОВЫЙ ГРАДИЕНТ ===== */
+/* Универсальный класс для заливки текста оранжевым градиентом */
 .text-gradient {
   background: linear-gradient(90deg, #FF7043, #FFB74D);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: var(--accent);
+  color: var(--accent); /* Фолбэк для старых браузеров */
   display: inline-block;
 }
 
-/* ===== HERO ===== */
+/* 
+  ========================================
+  3. ГЛАВНЫЙ ЭКРАН (HERO SECTION)
+  ========================================
+*/
+
+/* Главный блок занимает минимум 100% высоты окна браузера (100vh) */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -72,11 +90,12 @@ a:hover { color: var(--accent); }
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 5rem 1.5rem 10rem;
+  padding: 5rem 1.5rem 10rem; 
   background: var(--black);
   overflow: hidden;
 }
 
+/* Фоновая картинка с трещинами. Через opacity регулируется её прозрачность */
 .hero::before {
   content: "";
   position: absolute;
@@ -85,6 +104,7 @@ a:hover { color: var(--accent); }
   opacity: 0.4;
 }
 
+/* Радиальный градиент поверх картинки, чтобы края были темнее центра (эффект виньетки) */
 .hero::after {
   content: "";
   position: absolute;
@@ -92,11 +112,13 @@ a:hover { color: var(--accent); }
   background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.85));
 }
 
+/* Весь контент внутри Hero поднимается над слоями фонов */
 .hero-content {
   position: relative;
-  z-index: 20;
+  z-index: 20; 
 }
 
+/* Имя и фамилия над главным заголовком (с металлическим градиентом) */
 .hero .name-top {
   font-family: var(--font-heading);
   font-size: 1.4rem;
@@ -104,7 +126,7 @@ a:hover { color: var(--accent); }
   letter-spacing: 0.35em;
   text-transform: uppercase;
   margin-bottom: 1.5rem;
-
+  
   background: linear-gradient(90deg, #5c6c7c 0%, #ffffff 50%, #5c6c7c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -112,41 +134,31 @@ a:hover { color: var(--accent); }
   color: #fff;
 }
 
+/* Огромный заголовок "ВИДЕОМОНТАЖ" со сложной текстурой прямо внутри букв */
 .hero h1 {
   font-family: var(--font-heading);
-  font-size: 5.5rem;
-  font-weight: 800;
+  font-size: 5.5rem; 
+  font-weight: 800; 
   letter-spacing: 0.05em;
   text-transform: uppercase;
   margin-bottom: 2.5rem;
   line-height: 1.1;
-
+  
+  /* Внутри букв: паттерн сетки + фон картинки */
   background:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0,0,0,0.1) 2px,
-      rgba(0,0,0,0.1) 4px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 2px,
-      rgba(0,0,0,0.1) 2px,
-      rgba(0,0,0,0.1) 4px
-    ),
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px),
+    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px),
     linear-gradient(rgba(220, 225, 230, 0.85), rgba(220, 225, 230, 0.85)),
     url('main_preview.jpg') center/130% no-repeat;
-
+    
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: #dcdfe5;
-
-  filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.6));
+  color: #dcdfe5; 
+  filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.6)); /* Падающая тень для читаемости */
 }
 
+/* Подзаголовки (Видео | Звук | Съёмка) */
 .hero-tags {
   font-family: var(--font-heading);
   font-size: 1.2rem;
@@ -157,17 +169,15 @@ a:hover { color: var(--accent); }
   margin-bottom: 0;
 }
 
-.hero-tags span {
-  margin: 0 0.6rem;
-}
+.hero-tags span { margin: 0 0.6rem; }
 
-/* ===== HERO BOTTOM (Локация и Кнопка) ===== */
+/* Блок локации и кнопки "Написать мне" в самом низу экрана */
 .hero-bottom {
   position: absolute;
   bottom: 4rem;
   left: 0;
   right: 0;
-  z-index: 20;
+  z-index: 20; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -178,10 +188,11 @@ a:hover { color: var(--accent); }
   font-size: 1.1rem;
   font-weight: 300;
   letter-spacing: 0.03em;
-  color: #e0e5ea;
+  color: #e0e5ea; 
   margin-bottom: 1.5rem;
 }
 
+/* Стилизация кнопки (стеклянный эффект + появление градиентной рамки при наведении) */
 .hero-cta {
   display: inline-block;
   font-family: var(--font-heading);
@@ -193,19 +204,25 @@ a:hover { color: var(--accent); }
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0.9rem 2.5rem;
   background: rgba(13, 13, 13, 0.3);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px); /* Эффект матового стекла */
   transition: background 0.3s, color 0.3s, box-shadow 0.3s;
 }
 
 .hero-cta:hover {
   background: rgba(13, 13, 13, 0.8);
   border-color: transparent;
-  border-image: linear-gradient(90deg, #FF7043, #FFB74D) 1;
+  border-image: linear-gradient(90deg, #FF7043, #FFB74D) 1; /* Градиентная обводка */
   color: #FFB74D;
   box-shadow: 0 4px 15px rgba(255, 112, 67, 0.25);
 }
 
-/* ===== NAV ===== */
+/* 
+  ========================================
+  4. НАВИГАЦИОННОЕ МЕНЮ (TOP BAR)
+  ========================================
+*/
+
+/* Меню зафиксировано сверху (fixed). Изначально сдвинуто за пределы экрана (-100%) */
 .nav {
   position: fixed;
   top: 0;
@@ -224,33 +241,35 @@ a:hover { color: var(--accent); }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   border-bottom: 1px solid var(--dark);
-
+  
   transform: translateY(-100%);
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.nav.scrolled {
-  transform: translateY(0);
-}
+/* Этот класс добавляется через JS при скролле вниз, чтобы показать меню */
+.nav.scrolled { transform: translateY(0); }
 
 .nav a {
   margin: 0 1.2rem;
   color: var(--text-dim);
 }
 
-.nav a:hover {
-  color: var(--accent);
-}
+.nav a:hover { color: var(--accent); }
 
-/* ===== SECTIONS ===== */
+/* 
+  ========================================
+  5. ОБЩИЕ СТИЛИ СЕКЦИЙ (Обо мне, Работы и т.д.)
+  ========================================
+*/
 section {
   position: relative;
-  z-index: 20;
+  z-index: 20; 
   padding: 5rem 1.5rem;
-  max-width: 960px;
-  margin: 0 auto;
+  max-width: 960px; /* Ограничиваем ширину контента для читабельности */
+  margin: 0 auto;   /* Центрируем по горизонтали */
 }
 
+/* Номера секций (/ 01, / 02) */
 .section-label {
   font-family: var(--font-mono);
   font-size: 0.85rem;
@@ -259,10 +278,11 @@ section {
   margin-bottom: 0.5rem;
 }
 
+/* Заголовки секций с нижним подчеркиванием */
 .section-title {
   font-family: var(--font-heading);
   font-size: 1.8rem;
-  font-weight: 700;
+  font-weight: 700; 
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #E0E5EA;
@@ -271,10 +291,16 @@ section {
   border-bottom: 1px solid var(--dark);
 }
 
-/* ===== ABOUT ===== */
+/* 
+  ========================================
+  6. СЕКЦИЯ: ОБО МНЕ
+  ========================================
+*/
+
+/* Две колонки: слева текст, справа список навыков */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr; /* Колонки равной ширины */
   gap: 2.5rem;
 }
 
@@ -284,14 +310,9 @@ section {
   color: var(--text);
   line-height: 1.8;
 }
+.about-text p:last-child { margin-bottom: 0; }
 
-.about-text p:last-child {
-  margin-bottom: 0;
-}
-
-.skills-list {
-  list-style: none;
-}
+.skills-list { list-style: none; }
 
 .skills-list li {
   padding: 0.7rem 0;
@@ -302,53 +323,50 @@ section {
   gap: 1.5rem;
 }
 
+/* Названия программ с засечками (serif) */
 .skills-list .skill-name {
   color: var(--text);
-  font-family: var(--font-serif);
+  font-family: var(--font-serif); 
   font-size: 1.15rem;
-  font-weight: 600;
+  font-weight: 600; 
   letter-spacing: 0.02em;
-  flex: 1 1 auto;
+  flex: 1 1 auto; 
 }
 
+/* Описание навыка (гротеск, прижато вправо) */
 .skills-list .skill-desc {
   color: var(--text-dim);
-  font-family: var(--font-text);
+  font-family: var(--font-text); 
   font-size: 1rem;
   text-align: right;
-  flex: 0 0 auto;
+  flex: 0 0 auto; 
   max-width: 45%;
 }
 
-/* ===== PORTFOLIO ===== */
+/* 
+  ========================================
+  7. СЕКЦИЯ: ПОРТФОЛИО
+  ========================================
+*/
+
+/* Сетка портфолио. Слева колонка из двух карточек, справа одна длинная */
 .portfolio-top {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
 }
-
 .portfolio-top-left {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
-
 .portfolio-top-left .project-card {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.portfolio-top-left .project-card .poster {
-  flex: 1;
-  aspect-ratio: auto;
-  min-height: 0;
-}
-
-.portfolio-top-left .project-card .info {
-  flex-shrink: 0;
-}
-
+/* Настройки обертки для карточки проекта */
 .project-card {
   background: var(--near-black);
   border: 1px solid var(--dark);
@@ -357,18 +375,25 @@ section {
   cursor: pointer;
 }
 
+/* При наведении рамка становится градиентной */
 .project-card:hover {
   border-color: transparent;
   border-image: linear-gradient(90deg, #FF7043, #FFB74D) 1;
 }
 
+/* Блок с картинкой/видео */
 .project-card .poster {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 9; /* Пропорции горизонтального видео */
   overflow: hidden;
   background: var(--dark);
   position: relative;
 }
 
+/* Если карточка отмечена как .vertical, меняем пропорции под шортс/рилс */
+.project-card.vertical .poster { aspect-ratio: 9 / 16; }
+.project-card.vertical { height: 100%; }
+
+/* Постер (картинка) лежит поверх видео (z-index: 0) */
 .project-card .poster img {
   position: absolute;
   top: 0;
@@ -376,11 +401,12 @@ section {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.01);
+  transform: scale(1.01); /* Убирает случайные микро-зазоры */
   z-index: 0;
   transition: opacity 0.3s;
 }
 
+/* Видео изначально прозрачное (opacity: 0, z-index: 1) */
 .project-card .poster video {
   position: absolute;
   top: 0;
@@ -391,18 +417,15 @@ section {
   transform: scale(1.01);
   opacity: 0;
   transition: opacity 0.4s ease;
-  pointer-events: none;
+  pointer-events: none; /* Видео не перехватывает клики, они идут на карточку */
   z-index: 1;
 }
 
-.project-card:hover .poster video {
-  opacity: 1;
-}
+/* Логика Hover: показываем видео, прячем картинку */
+.project-card:hover .poster video { opacity: 1; }
+.project-card:hover .poster img { opacity: 0; }
 
-.project-card:hover .poster img {
-  opacity: 0;
-}
-
+/* Плашка "Смотреть" по центру плеера при наведении */
 .project-card .poster .play-hint {
   position: absolute;
   inset: 0;
@@ -413,15 +436,11 @@ section {
   transition: opacity 0.3s;
   z-index: 2;
 }
-
-.project-card:hover .poster .play-hint {
-  opacity: 1;
-}
-
+.project-card:hover .poster .play-hint { opacity: 1; }
 .project-card .poster .play-hint span {
   font-family: var(--font-heading);
   font-weight: 500;
-  font-size: 0.85rem;
+  font-size: 0.85rem; 
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #fff;
@@ -430,48 +449,35 @@ section {
   border: 1px solid rgba(255,255,255,0.2);
 }
 
-.project-card .info {
-  padding: 1.2rem 1.5rem 1.5rem;
-}
-
+/* Текстовая информация под плеером */
+.project-card .info { padding: 1.2rem 1.5rem 1.5rem; }
 .project-card .info h3 {
   font-family: var(--font-heading);
-  font-size: 1.15rem;
-  font-weight: 400;
+  font-size: 1.15rem; 
+  font-weight: 400; 
   letter-spacing: 0.03em;
   text-transform: uppercase;
   margin-bottom: 0.4rem;
 }
-
 .project-card .info .client {
-  font-size: 0.95rem;
+  font-size: 0.95rem; 
   margin-bottom: 0.6rem;
-  color: #fff;
+  color: #fff; 
 }
-
 .project-card .info p {
-  font-size: 1rem;
+  font-size: 1rem; 
   color: #888888;
   line-height: 1.6;
 }
 
-.project-card.vertical .poster {
-  aspect-ratio: 9 / 16;
-}
+/* Карточка на всю ширину (нижняя) */
+.project-card.full { margin-top: 1.5rem; }
 
-.project-card.vertical {
-  height: 100%;
-}
-
-.project-card.full {
-  margin-top: 1.5rem;
-}
-
+/* Кнопка "Все работы" (стилистика клонирует hero-cta) */
 .portfolio-footer {
   margin-top: 2.5rem;
   text-align: center;
 }
-
 .portfolio-footer a {
   display: inline-block;
   font-family: var(--font-heading);
@@ -486,7 +492,6 @@ section {
   backdrop-filter: blur(4px);
   transition: background 0.3s, color 0.3s, box-shadow 0.3s;
 }
-
 .portfolio-footer a:hover {
   background: rgba(13, 13, 13, 0.8);
   border-color: transparent;
@@ -495,110 +500,107 @@ section {
   box-shadow: 0 4px 15px rgba(255, 112, 67, 0.25);
 }
 
-/* ===== EXPERIENCE ===== */
-.timeline {
-  position: relative;
-}
+/* 
+  ========================================
+  8. СЕКЦИЯ: ОПЫТ РАБОТЫ (TIMELINE)
+  ========================================
+*/
+.timeline { position: relative; }
 
 .timeline-item {
   padding: 1.5rem 0;
   border-bottom: 1px solid rgba(255,255,255,0.04);
 }
-
-.timeline-item:last-child {
-  border-bottom: none;
-}
+.timeline-item:last-child { border-bottom: none; }
 
 .timeline-item .period {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.85rem; 
   letter-spacing: 0.1em;
   margin-bottom: 0.5rem;
 }
-
 .timeline-item h3 {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
-  font-weight: 400;
+  font-size: 1.25rem; 
+  font-weight: 400; 
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--text-dim);
   margin-bottom: 0.8rem;
 }
-
 .timeline-item p {
-  font-size: 1.1rem;
+  font-size: 1.1rem; 
   color: var(--text);
   line-height: 1.7;
 }
 
-/* ===== CONTACT ===== */
+/* 
+  ========================================
+  9. СЕКЦИЯ: КОНТАКТЫ & ФУТЕР
+  ========================================
+*/
 .contact-block {
   background: var(--near-black);
   border: 1px solid var(--dark);
-  padding: 3.5rem 2.5rem;
+  padding: 3.5rem 2.5rem; 
   text-align: center;
 }
 
 .contact-block .contact-link {
-  font-family: var(--font-heading);
-  font-size: 1.25rem;
+  font-family: var(--font-heading); 
+  font-size: 1.25rem; 
   color: var(--text-dim);
   letter-spacing: 0.05em;
   margin-bottom: 0.8rem;
 }
-
-.contact-block .contact-link a {
-  color: #fff;
-  transition: color 0.3s;
-}
-
-.contact-block .contact-link a:hover {
-  color: var(--accent);
-}
+.contact-block .contact-link a { color: #fff; transition: color 0.3s; }
+.contact-block .contact-link a:hover { color: var(--accent); }
 
 .contact-block .meta {
-  font-size: 1rem;
+  font-size: 1rem; 
   color: #666666;
   margin-top: 1.5rem;
 }
-
 .contact-block .meta span {
   display: inline-block;
   margin: 0 0.5rem;
   color: var(--dark);
 }
 
-/* ===== FOOTER ===== */
 footer {
   position: relative;
-  z-index: 20;
+  z-index: 20; 
   text-align: center;
   padding: 3rem 1.5rem;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.75rem; 
   letter-spacing: 0.1em;
   color: #666666;
   border-top: 1px solid var(--dark);
 }
 
-/* ===== RESPONSIVE ===== */
+/* 
+  ========================================
+  10. АДАПТИВ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ (МЕДИАЗАПРОСЫ)
+  ========================================
+*/
 @media (max-width: 768px) {
+  /* Уменьшаем шрифты на телефоне, меняем сетку на 1 колонку */
   .hero { padding-bottom: 12rem; }
   .hero .name-top { font-size: 1.1rem; margin-bottom: 1rem; }
   .hero h1 { font-size: 3rem; margin-bottom: 1.5rem; }
   .hero-tags { font-size: 0.8rem; letter-spacing: 0.2em; margin-bottom: 1rem;}
-
+  
   .hero-bottom { bottom: 3rem; }
   .hero-location { font-size: 0.95rem; letter-spacing: normal; margin-bottom: 1.5rem; }
-
-  .about-grid { grid-template-columns: 1fr; }
-  .portfolio-top { grid-template-columns: 1fr; }
+  
+  .about-grid { grid-template-columns: 1fr; } /* Теперь колонки друг под другом */
+  .portfolio-top { grid-template-columns: 1fr; } 
   .portfolio-top-left .project-card { flex: none; }
   .portfolio-top-left .project-card .poster { height: auto; }
   .nav a { margin: 0 0.6rem; }
   section { padding: 3rem 1.2rem; }
-
+  
   .section-title { font-size: 1.5rem; }
   .contact-block .contact-link { font-size: 1.1rem; }
 }
@@ -606,7 +608,9 @@ footer {
 </head>
 <body>
 
-<!-- Fixed Nav -->
+<!-- ========================================== -->
+<!-- ГЛАВНОЕ МЕНЮ (НАВИГАЦИЯ)                   -->
+<!-- ========================================== -->
 <nav class="nav">
   <a href="#about">Обо мне</a>
   <a href="#portfolio">Работы</a>
@@ -614,38 +618,44 @@ footer {
   <a href="#contact">Контакты</a>
 </nav>
 
-<!-- Hero -->
+<!-- ========================================== -->
+<!-- ГЛАВНЫЙ ЭКРАН (HERO)                       -->
+<!-- ========================================== -->
 <header class="hero" id="top">
-
   <div class="hero-content">
     <div class="name-top">Андрей Смирнов</div>
     <h1>ВИДЕОМОНТАЖ</h1>
-
+    
     <div class="hero-tags">
       ВИДЕО <span class="text-gradient">|</span> ЗВУК <span class="text-gradient">|</span> СЪЁМКА
     </div>
   </div>
-
+  
   <div class="hero-bottom">
     <div class="hero-location">
       Нижний Новгород. Удалённо или в офис.
     </div>
     <a href="#contact" class="hero-cta">Написать мне</a>
   </div>
-
 </header>
 
-<!-- About -->
+<!-- ========================================== -->
+<!-- СЕКЦИЯ: ОБО МНЕ                            -->
+<!-- ========================================== -->
 <section id="about">
   <div class="section-label text-gradient">/ 01</div>
   <h2 class="section-title">Обо мне</h2>
   <div class="about-grid">
+    
+    <!-- Текстовое описание -->
     <div class="about-text">
       <p>Монтирую видео с 2015 года, с коммерческими проектами работаю с 2021-го: реклама, YouTube-каналы, подкасты, образовательный контент. Не привязан к одной программе — работаю в DaVinci Resolve, Premiere Pro и других, делаю графику и анимацию в Fusion. Подберу подходящий инструмент под вашу задачу.</p>
       <p>Отдельно занимаюсь звуком: свожу, чищу и обрабатываю дорожки в Reaper, Ableton, iZotope RX, Adobe Audition, SpectraLayers. Уверен, что хороший звук — это половина восприятия видео, поэтому дополнительно развиваюсь в этом направлении.</p>
       <p>Работаю с полным циклом производства: от написания сценария и съёмки до финального рендера.</p>
       <p>Базируюсь в Нижнем Новгороде, готов к удалённой работе и долгосрочному сотрудничеству.</p>
     </div>
+    
+    <!-- Список софта и навыков -->
     <div>
       <ul class="skills-list">
         <li>
@@ -677,15 +687,20 @@ footer {
   </div>
 </section>
 
-<!-- Portfolio -->
+<!-- ========================================== -->
+<!-- СЕКЦИЯ: ИЗБРАННЫЕ РАБОТЫ (ПОРТФОЛИО)       -->
+<!-- ========================================== -->
 <section id="portfolio">
   <div class="section-label text-gradient">/ 02</div>
   <h2 class="section-title">Избранные работы</h2>
+  
   <div class="portfolio-top">
-
+    <!-- Вертикальная карточка для VK Клипов/Shorts -->
+    <!-- data-link содержит ссылку, которая открывается по клику через JS -->
     <div class="project-card vertical" data-link="https://disk.yandex.ru/i/hAPIBV5B7oyGyg">
       <div class="poster">
         <img src="concert-poster.jpg" alt="Концерт Арт-Линии" loading="lazy">
+        <!-- Атрибуты видео: без звука, бесконечный цикл, не скачивать лишнее (metadata) -->
         <video src="concert_short_webpreview.mp4" muted loop playsinline preload="metadata"></video>
         <div class="play-hint"><span>Смотреть</span></div>
       </div>
@@ -696,6 +711,7 @@ footer {
       </div>
     </div>
 
+    <!-- Колонка из двух горизонтальных карточек -->
     <div class="portfolio-top-left">
       <div class="project-card" data-link="https://disk.yandex.ru/i/Jo2ITwkcyN4mKA">
         <div class="poster">
@@ -723,9 +739,9 @@ footer {
         </div>
       </div>
     </div>
-
   </div>
 
+  <!-- Карточка проекта на всю ширину под верхней сеткой -->
   <div class="project-card full" data-link="https://disk.yandex.ru/i/kogeMseEagK_GA">
     <div class="poster">
       <img src="tea-poster.jpg" alt="Грузинский чай Мегобари" loading="lazy">
@@ -738,12 +754,15 @@ footer {
       <p>Рекламный ролик чайных плантаций.</p>
     </div>
   </div>
+  
   <div class="portfolio-footer">
     <a href="works.html">Все работы</a>
   </div>
 </section>
 
-<!-- Experience -->
+<!-- ========================================== -->
+<!-- СЕКЦИЯ: ОПЫТ РАБОТЫ                        -->
+<!-- ========================================== -->
 <section id="experience">
   <div class="section-label text-gradient">/ 03</div>
   <h2 class="section-title">Опыт работы</h2>
@@ -770,7 +789,9 @@ footer {
   </div>
 </section>
 
-<!-- Contact -->
+<!-- ========================================== -->
+<!-- СЕКЦИЯ: КОНТАКТЫ                           -->
+<!-- ========================================== -->
 <section id="contact">
   <div class="section-label text-gradient">/ 04</div>
   <h2 class="section-title">Контакты</h2>
@@ -782,15 +803,21 @@ footer {
   </div>
 </section>
 
-<!-- Footer -->
+<!-- ========================================== -->
+<!-- ФУТЕР                                      -->
+<!-- ========================================== -->
 <footer>
   Андрей Смирнов &mdash; 2026
 </footer>
 
+<!-- ========================================== -->
+<!-- JAVASCRIPT ЛОГИКА                          -->
+<!-- ========================================== -->
 <script>
-// Появление навигации при скролле
+// === 1. Логика выезжающего меню при скролле ===
 const nav = document.querySelector('.nav');
 window.addEventListener('scroll', () => {
+  // Если прокрутили страницу вниз больше чем на 100 пикселей - показываем меню
   if (window.scrollY > 100) {
     nav.classList.add('scrolled');
   } else {
@@ -798,26 +825,32 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Логика видео в карточках портфолио
+// === 2. Логика работы видео и ссылок в карточках портфолио ===
+// Находим все элементы с классом .project-card
 document.querySelectorAll('.project-card').forEach(function(card) {
-  const video = card.querySelector('video');
+  const video = card.querySelector('video'); // Ищем видео внутри каждой карточки
 
+  // Событие: мышь наведена на карточку
   card.addEventListener('mouseenter', () => {
     if (video) {
-      video.play().catch(e => console.log(e));
+      // Пытаемся запустить воспроизведение (с проверкой на ошибки, так как браузеры могут блокировать autoplay)
+      video.play().catch(e => console.log("Видео не может быть запущено автоматически:", e));
     }
   });
 
+  // Событие: мышь убрана с карточки
   card.addEventListener('mouseleave', () => {
     if (video) {
-      video.pause();
-      video.currentTime = 0;
+      video.pause(); // Ставим на паузу
+      video.currentTime = 0; // Сбрасываем время на начало
     }
   });
 
+  // Событие: клик по карточке
   card.addEventListener('click', function() {
-    const link = card.getAttribute('data-link');
+    const link = card.getAttribute('data-link'); // Получаем ссылку из атрибута data-link
     if (link) {
+      // Открываем ссылку в новой вкладке
       window.open(link, '_blank');
     }
   });
